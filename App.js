@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import { View, Text, Image, StyleSheet, FlatList, Alert } from 'react-native';
 import Header from './components/header';
-import { uuid } from 'uuidv4';
 import ListItem from './components/ListItem';
 import AddItem from './components/AddItem';
 
