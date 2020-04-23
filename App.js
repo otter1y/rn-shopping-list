@@ -1,36 +1,55 @@
-import * as React from 'react';
-import { Platform, StyleSheet, Text, View } from 'react-native';
+import React, {useState} from 'react';
+import { View, Text, Image, StyleSheet, FlatList, Alert } from 'react-native';
+import Header from './components/header';
+import { uuid } from 'uuidv4';
+import ListItem from './components/ListItem';
+import AddItem from './components/AddItem';
 
-const instructions = Platform.select({
-  ios: `Press Cmd+R to reload,\nCmd+D or shake for dev menu`,
-  android: `Double tap R on your keyboard to reload,\nShake or press menu button for dev menu`,
-});
+const App = () => {
+  const [items, setItems] = useState([
+    {id: 'asdjk', text: 'Milk'},
+    {id: 'bsdjk', text: 'Eggs'},
+    {id: 'csdjk', text: 'Bread'},
+    {id: 'dsdjk', text: 'Juice'},
+  ]);
 
-export default function App() {
+  const deleteItem = (id) => {
+    setItems (prevItems => {
+      return prevItems.filter(item => item.id != id);
+    });
+  }
+
+  const addItem = (text) => {
+    if (!text){
+
+      Alert.alert('Error', 'Please enter an item', {text: 'Ok'})
+
+    } else{
+
+    setItems (prevItems => {
+      return [{id: Math.floor(Math.random() * Math.floor(1000000)), text}, ...prevItems];
+    });
+    }
+  }
+
   return (
     <View style={styles.container}>
-      <Text style={styles.welcome}>Welcome to React Native!</Text>
-      <Text style={styles.instructions}>To get started, edit App.js</Text>
-      <Text style={styles.instructions}>{instructions}</Text>
+      <Header />
+      <AddItem addItem={addItem}/>
+      <FlatList 
+        data={items} 
+        renderItem={({item}) => <ListItem item={item} 
+        deleteItem={(deleteItem)} />}
+      />
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+    paddingTop: 60,
   },
 });
+
+export default App;
