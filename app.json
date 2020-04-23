@@ -1,0 +1,17 @@
+{
+  "name": "animal2",
+  "displayName": "animal2",
+  "expo": {
+    "name": "animal2",
+    "slug": "animal2",
+    "version": "1.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
